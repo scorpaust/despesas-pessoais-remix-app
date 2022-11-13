@@ -1,26 +1,42 @@
 import ExpenseStatistics from "~/components/expenses/ExpenseStatistics";
 import Chart from "~/components/expenses/Chart";
-
-const DUMMY_EXPENSES = [
-    {
-        id: 'd1',
-        title: 'Gasolina',
-        amount: 25.10,
-        date: new Date().toISOString()
-    },
-    {
-        id: 'd2',
-        title: 'Renda da Casa',
-        amount: 500.00,
-        date: new Date().toISOString()
-    }
-];
+import { getExpenses } from "../data/expenses.server";
+import { json } from "@remix-run/node";
+import { useCatch, useLoaderData } from "@remix-run/react";
+import Error from "~/components/util/Error";
 
 export default function ExpensesAnalysisPage() {
+
+    const expenses = useLoaderData();
+
     return (
         <main>
-            <Chart expenses={DUMMY_EXPENSES} />
-            <ExpenseStatistics expenses={DUMMY_EXPENSES} />
+            <Chart expenses={expenses} />
+            <ExpenseStatistics expenses={expenses} />
         </main>
     );
+}
+
+export async function loader() {
+    const expenses = await getExpenses();
+
+    if (!expenses || expenses.length === 0) {
+        throw json({ message: 'Não foi possível carregar a lista de despesas para análise'},{
+            status: 404,
+            statusText: 'Despesas não encontradas.'
+        });
+    }
+
+    return expenses;
+}
+
+export function CatchBoundary() {
+
+    const caugthResponse = useCatch();
+
+    return <main>
+        <Error title={caughtResponse.statusText}>
+            <p>{caughtResponse.data.message || 'Algo correu de forma inesperada. Não foi possível carregar a lista de despesas para análise.'}</p>
+        </Error>
+    </main>
 }

@@ -1,6 +1,9 @@
+import { redirect } from "@remix-run/node";
 import { useNavigate } from "@remix-run/react";
 import ExpenseForm from "~/components/expenses/ExpenseForm";
 import Modal from "~/components/util/Modal";
+import { deleteExpense, updateExpense } from "~/routes/data/expenses.server";
+import { validateExpenseInput } from "~/routes/data/validation.server";
 
 export default function UpdateExpensesPage() {
     
@@ -24,3 +27,28 @@ export default function UpdateExpensesPage() {
 
     return expense;
 } */
+
+export async function action({ params, request }) {
+    const expenseId = params.indice;
+
+    if (request.method === 'PATCH') {
+        
+        const formData = await request.formData();
+
+        const expenseData = Object.fromEntries(formData);
+
+        try {
+            validateExpenseInput(expenseData);
+        } catch(error) {
+            return error;
+        }
+
+        await updateExpense(expenseId, expenseData);
+
+        return redirect('/despesas');
+    } else {
+        await deleteExpense(expenseId);
+
+        return { deletedId: expenseId};
+    }   
+}

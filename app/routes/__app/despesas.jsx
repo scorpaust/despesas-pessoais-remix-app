@@ -8,6 +8,8 @@ export default function ExpensesLayout() {
 
     const expenses = useLoaderData();
 
+    const hasExpenses = expenses && expenses.length > 0;
+
     return (
         <>
             <Outlet />
@@ -22,7 +24,15 @@ export default function ExpensesLayout() {
                         <span>Carregar Dados em Bruto</span>
                     </a>
                 </section>
-                <ExpensesList expenses={expenses} />
+                {hasExpenses && 
+                    <ExpensesList expenses={expenses} />
+                }
+                {!hasExpenses && 
+                    <section id="no-expenses">
+                        <p>Sem despesas registadas.</p>
+                        <p>Comece a <Link to="adicionar">adicionar despesas</Link>.</p>
+                    </section>
+                }
             </main>
         </>
     );

@@ -12,6 +12,10 @@ function ExpenseForm() {
 
   const expenseData = expenses.find((expense) => expense.id === params.indice);
 
+  if (params.indice && !expenseData) {
+    return <p>Índice de despesa não encontrado na base de dados.</p>;
+  }
+
   const validationErrors = useActionData();
 
   const navigation = useTransition();
@@ -41,7 +45,7 @@ function ExpenseForm() {
   } */
 
   return (
-    <Form method="post" className="form" id="expense-form" /* onSubmit={submitHandler} */>
+    <Form method={expenseData ? 'patch' : 'post'} className="form" id="expense-form" /* onSubmit={submitHandler} */>
       <p>
         <label htmlFor="title">Despesa</label>
         <input type="text" id="title" name="title" required maxLength={30} defaultValue={defaultValues.title} required />
