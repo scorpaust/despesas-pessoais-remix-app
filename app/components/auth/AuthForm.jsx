@@ -1,11 +1,13 @@
-import { Form, Link, useSearchParams, useTransition } from '@remix-run/react';
+import { Form, Link, useActionData, useSearchParams, useTransition } from '@remix-run/react';
 import { FaLock, FaUserPlus } from 'react-icons/fa';
 
 function AuthForm() {
 
-  const [searchParams,] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const navigation = useTransition();
+
+  const validationErrors = useActionData();
 
   const authMode = searchParams.get('modo') || 'entrar';
 
@@ -28,9 +30,18 @@ function AuthForm() {
         <label htmlFor="password">Senha</label>
         <input type="password" id="password" name="password" minLength={7} />
       </p>
+      {validationErrors && (
+        <ul>
+            <li>{validationErrors}</li>
+        </ul>
+      )}
       <div className="form-actions">
-        <button disabled={isSubmitting}>{isSubmitting ? 'Em autenticação...' : submitButtonCaption}</button>
-        <Link to={authMode === 'entrar' ? '?modo=registar' : '?modo=entrar' }>{toggleButtonCaption}</Link>
+        <button disabled={isSubmitting}>
+          {isSubmitting ? 'A entrar...' : submitButtonCaption}
+        </button>
+        <Link to={authMode === 'entrar' ? '?modo=registar' : '?modo=entrar'}>
+          {toggleButtonCaption}
+        </Link>
       </div>
     </Form>
   );

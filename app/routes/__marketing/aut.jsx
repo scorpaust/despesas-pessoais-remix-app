@@ -1,5 +1,7 @@
-import authStyles from "~/styles/auth.css";
+import authStyles from "../../styles/auth.css";
 import AuthForm from "~/components/auth/AuthForm";
+import { validateCredentials } from "../data/validation.server";
+import { login, signUp } from "../data/auth.server";
 
 export default function AuthPage() {
     return (
@@ -19,10 +21,20 @@ export async function action({ request }) {
 
     const credentials = Object.fromEntries(formData);
 
-    if (authMode === 'entrar') {
+    try {
+        validateCredentials(credentials)
+    } catch (error) {
+        return error;
+    }
 
-    } else {
-        
+    try {
+        if (authMode === 'entrar') {
+            return await login(credentials);
+        } else {
+            return await signUp(credentials);
+        }
+    } catch (error) {
+        return error.message;
     }
 }
 

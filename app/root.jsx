@@ -22,11 +22,8 @@ function Document({title, children}) {
   return (
     <html lang="pt-PT">
       <head>
-        <Meta />
         <title>{title}</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" />
+        <Meta />
         <Links />
       </head>
       <body>
@@ -77,5 +74,22 @@ export function ErrorBoundary({ error }) {
 }
 
 export function links() {
-  return [{ rel: "stylesheet", href: sharedStyles }];
+  return [
+    { 
+      rel: "stylesheet", 
+      href: sharedStyles 
+    },
+    {
+      rel: "preconnect",
+      href: "https://fonts.googleapis.com"
+    },
+    {
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com"
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap"
+    }
+  ];
 }

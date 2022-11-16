@@ -3,6 +3,7 @@ import ExpensesList from "~/components/expenses/ExpensesList";
 import expensesStyles from "~/styles/expenses.css";
 import { FaPlus, FaDownload } from "react-icons/fa";
 import { getExpenses } from "../data/expenses.server";
+import { requireUserSession } from "../data/auth.server";
 
 export default function ExpensesLayout() {
 
@@ -38,8 +39,13 @@ export default function ExpensesLayout() {
     );
 }
 
-export async function loader() {
-    return getExpenses();
+export async function loader({ request }) {
+  
+    const userId = await requireUserSession(request);
+
+    const expenses = await getExpenses(userId);
+  
+    return expenses;
 }
 
 export function links() {

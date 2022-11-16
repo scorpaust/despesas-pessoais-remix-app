@@ -30,3 +30,29 @@ export function validateExpenseInput(input) {
         throw validationErrors;
     }
 }
+
+function isValidEmail(value) {
+
+    return value && value.includes('@');
+
+}
+  
+function isValidPassword(value) {
+    return value && value.trim().length >= 7;
+}
+  
+export function validateCredentials(input) {
+    let validationErrors = {};
+
+    if (!isValidEmail(input.email)) {
+        validationErrors.email = 'Endereço eletrónico inválido.';
+    }
+
+    if (!isValidPassword(input.password)) {
+        validationErrors.password = 'Senha inválida. Tem de ter, pelo menos, 7 caracteres.';
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+        throw validationErrors;
+    }
+}
