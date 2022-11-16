@@ -14,7 +14,7 @@ const {
 } = require("@remix-run/react");
 
 export const meta = () => ({
-  charset: "ISO-8859-1",
+  charset: "utf-8",
   title: "Despesas Pessoais",
   viewport: "width=device-width,initial-scale=1",
 });
