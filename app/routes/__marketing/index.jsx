@@ -32,7 +32,7 @@ export default function Index() {
         </header>
         <div className="marketing-content">
           <p className='marketing-explanation'>
-            Beneficie de uma análise classificada e detalhada para que possa compreender melhor os padrões agregados aos seus gastos.
+            Beneficia de uma análise classificada e detalhada para que possas compreender melhor os padrões agregados aos teus gastos.
           </p>
           <div className="marketing-image">
             <img src="imgs/grafico_despesas.png" alt="Demonstração de Gráfico de Barras." />
