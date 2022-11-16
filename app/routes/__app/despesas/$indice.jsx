@@ -52,3 +52,13 @@ export async function action({ params, request }) {
         return { deletedId: expenseId};
     }   
 }
+
+export function meta({ params, location, data, parentsData }) {
+    
+    const expense = parentsData['routes/__app/despesas'].find((expense) => expense.id === params.indice);
+    
+    return {
+        title: expense.title,
+        despription: 'Atualizar Despesa'
+    }
+}

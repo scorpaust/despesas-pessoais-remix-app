@@ -39,4 +39,19 @@ export default function PricingPage() {
   );
 }
 
-export function meta() {}
+export function meta() {
+  return {
+    title: "Planos de Pagamento",
+    description: "Consulte aqui os nossos planos de pagamento."
+  }
+}
+
+export function headers({ parentHeaders }) {
+  return {
+      'Cache-Control': parentHeaders.get('Cache-Control')
+  }
+}
+
+export const handle = {
+  disableJS: true
+}

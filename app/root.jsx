@@ -10,6 +10,7 @@ const {
   ScrollRestoration,
   Link,
   useCatch,
+  useMatches
 } = require("@remix-run/react");
 
 export const meta = () => ({
@@ -19,17 +20,22 @@ export const meta = () => ({
 });
 
 function Document({title, children}) {
+
+  const matches = useMatches();
+
+  const disableJS = matches.some(match => match.handle?.disableJS);
+
   return (
     <html lang="pt-PT">
       <head>
-        <title>{title}</title>
+        {title && <title>{title}</title>}
         <Meta />
         <Links />
       </head>
       <body>
         {children}
         <ScrollRestoration />
-        <Scripts />
+        {!disableJS && <Scripts />}
         <LiveReload />
       </body>
     </html>

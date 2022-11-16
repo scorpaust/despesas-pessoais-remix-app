@@ -46,3 +46,9 @@ export function links() {
         }
     ]
 }
+
+export function headers({ parentHeaders }) {
+    return {
+        'Cache-Control': parentHeaders.get('Cache-Control')
+    }
+  }

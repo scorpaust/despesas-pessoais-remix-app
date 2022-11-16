@@ -12,7 +12,7 @@ export default function Index() {
         </header>
         <div className="marketing-content">
           <div className="marketing-image">
-            <img src="imgs/expenses-management.jpg" alt="Lista de Despesas." />
+            <img src="imgs/gestao_despesas.png" alt="Lista de Despesas." />
           </div>
           <div className="marketing-explanation">
             <p>Gere as tuas despesas num só local.</p>
@@ -35,7 +35,7 @@ export default function Index() {
             Beneficie de uma análise classificada e detalhada para que possa compreender melhor os padrões agregados aos seus gastos.
           </p>
           <div className="marketing-image">
-            <img src="imgs/expenses-chart.jpg" alt="Demonstração de Gráfico de Barras." />
+            <img src="imgs/grafico_despesas.png" alt="Demonstração de Gráfico de Barras." />
           </div>
         </div>
       </section>
@@ -43,4 +43,19 @@ export default function Index() {
   );
 }
 
-export function meta() {}
+export function meta() {
+  return {
+    title: "Despesas Pessoais - Aplicação Completa",
+    description: "Gere aqui todas as tuas despesas"
+  }
+}
+
+export function headers({ parentHeaders }) {
+  return {
+      'Cache-Control': parentHeaders.get('Cache-Control')
+  }
+}
+
+export const handle = {
+  disableJS: true
+}
