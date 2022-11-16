@@ -48,7 +48,7 @@ function ExpenseForm() {
     <Form method={expenseData ? 'patch' : 'post'} className="form" id="expense-form" /* onSubmit={submitHandler} */>
       <p>
         <label htmlFor="title">Despesa</label>
-        <input type="text" id="title" name="title" required maxLength={30} defaultValue={defaultValues.title} required />
+        <input type="text" id="title" name="title" required maxLength={30} defaultValue={defaultValues.title} />
       </p>
 
       <div className="form-row">
