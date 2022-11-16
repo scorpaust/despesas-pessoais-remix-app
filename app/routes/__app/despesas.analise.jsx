@@ -38,9 +38,9 @@ export function CatchBoundary() {
 
     const caugthResponse = useCatch();
 
-    return <main>
+    return (<main>
         <Error title={caughtResponse.statusText}>
-            <p>{caughtResponse.data.message || 'Algo correu de forma inesperada. Não foi possível carregar a lista de despesas para análise.'}</p>
+            <p>{caughtResponse.data?.message || 'Algo correu de forma inesperada. Não foi possível carregar a lista de despesas para análise.'}</p>
         </Error>
-    </main>
+    </main>);
 }
