@@ -36,7 +36,7 @@ export async function loader({ request }) {
 
 export function CatchBoundary() {
 
-    const caugthResponse = useCatch();
+    const caughtResponse = useCatch();
 
     return (<main>
         <Error title={caughtResponse.statusText}>
